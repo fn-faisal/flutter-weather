@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
         title: Row(
           children: [
             Consumer<CityModel>(builder: (context, state, child){
-              return Text(state.selectedCity);
+              return Text(state.selectedCity?.name ?? 'No City Selected');
             }),
             Padding(
               padding: const EdgeInsets.only(left: Sizes.sm),

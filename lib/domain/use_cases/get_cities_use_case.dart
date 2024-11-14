@@ -3,11 +3,11 @@
 import 'package:weather_app/domain/entities/city_entity.dart';
 import 'package:weather_app/domain/repositories/i_city_repository.dart';
 
-class SearchCityUseCase { 
+class GetCitiesUseCase { 
   ICityRepository cityRepository;
 
-  SearchCityUseCase({required this.cityRepository });
+  GetCitiesUseCase({required this.cityRepository });
 
-  Future<List<CityEntity>> execute( String name ) =>
-    cityRepository.search(name);
+  Future<List<CityEntity>> execute() =>
+    cityRepository.all();
 }

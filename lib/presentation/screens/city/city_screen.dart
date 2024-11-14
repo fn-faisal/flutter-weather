@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/data/models/city_model.dart';
@@ -35,7 +33,7 @@ class CityScreen extends StatelessWidget {
                       Card(
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(c),
+                          child: Text(c.name),
                         )
                       )
                   ]

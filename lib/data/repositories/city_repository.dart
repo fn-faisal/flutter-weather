@@ -4,7 +4,7 @@ import 'package:weather_app/domain/repositories/i_city_repository.dart';
 
 class CityRepository extends ICityRepository {
   @override
-  Future<List<CityEntity>> search(String name) {
+  Future<List<CityEntity>> all() {
     return Future.value([
       CityEntity.fromJson({ 'name': 'Test City' })
     ]);

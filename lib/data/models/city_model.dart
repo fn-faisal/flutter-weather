@@ -2,24 +2,29 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
+import 'package:weather_app/domain/entities/city_entity.dart';
 
 class CityModel extends ChangeNotifier {
-  late String _selectedCity = '';
+  CityEntity? _selectedCity;
 
-  final List<String> _cities = [];
+  final List<CityEntity> _cities = [];
 
-  UnmodifiableListView<String> get cities => UnmodifiableListView(_cities);
-  String get selectedCity => _selectedCity;
+  UnmodifiableListView<CityEntity> get cities => UnmodifiableListView(_cities);
+  CityEntity? get selectedCity => _selectedCity;
 
-  void changeCity(String newCity) {
+  void changeCity(CityEntity newCity) {
     _selectedCity = newCity;
-    if (!_cities.contains(newCity)) {
+    var foundCity = _cities
+      .where(
+        (c) => c.name == newCity.name,
+      ).firstOrNull;
+    if (foundCity == null) {
       addCity(newCity);
     }
     notifyListeners();
   }
 
-  void addCity(String city) {
+  void addCity(CityEntity city) {
     _cities.add(city);
     notifyListeners();
   }

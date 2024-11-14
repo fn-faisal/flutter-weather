@@ -1,13 +1,11 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:weather_app/data/models/city_model.dart';
 import 'package:weather_app/presentation/molecules/clickable_asset.dart';
 
 class CitySearhForm extends StatefulWidget {
-  const CitySearhForm({super.key});
+  final Future<void> Function(String) onSearch;
 
+  const CitySearhForm({super.key, required this.onSearch});
+  
   @override
   State<CitySearhForm> createState() => _CitySearhFormState();
 }
@@ -29,9 +27,9 @@ class _CitySearhFormState extends State<CitySearhForm> {
               icon: ClickableAsset(
                 onTap: () {
                   if(_formKey.currentState!.validate()) {
-                    log(cityNameCtrl.value.text);
-                    Provider.of<CityModel>(context, listen: false)
-                      .changeCity(cityNameCtrl.value.text);
+                    // Provider.of<CityModel>(context, listen: false)
+                    //   .changeCity(cityNameCtrl.value.text);
+                    widget.onSearch(cityNameCtrl.value.text);
                   }
                 }, 
                 assetPath: 'assets/icons/edit.svg'
