@@ -1,9 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:weather_app/data/models/city_model.dart';
+import 'package:weather_app/data/models/timezone_model.dart';
 import 'package:weather_app/presentation/molecules/clickable_asset.dart';
 import 'package:weather_app/presentation/screens/home/widgets/hourly_weather.dart';
 import 'package:weather_app/presentation/screens/home/widgets/summary.dart';
@@ -12,8 +9,8 @@ import 'package:weather_app/utils/sizes.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  void onTapCity (BuildContext context) {
-    Navigator.pushNamed(context, '/city');
+  void onTapTimezone (BuildContext context) {
+    Navigator.pushNamed(context, '/timezone');
   }
 
   @override
@@ -22,14 +19,14 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Row(
           children: [
-            Consumer<CityModel>(builder: (context, state, child){
-              return Text(state.selectedCity?.name ?? 'No City Selected');
+            Consumer<TimezoneModel>(builder: (context, state, child){
+              return Text(state.selectedTimezone?.name ?? 'No Timezone Selected');
             }),
             Padding(
               padding: const EdgeInsets.only(left: Sizes.sm),
               child: ClickableAsset(
                 onTap: () {
-                  onTapCity(context);
+                  onTapTimezone(context);
                 }, 
                 assetPath: 'assets/icons/edit.svg',
                 color: Colors.grey

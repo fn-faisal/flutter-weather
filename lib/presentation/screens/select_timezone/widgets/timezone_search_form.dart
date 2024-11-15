@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/presentation/molecules/clickable_asset.dart';
 
-class CitySearhForm extends StatefulWidget {
+class TimezoneSearhForm extends StatefulWidget {
   final Future<void> Function(String) onSearch;
 
-  const CitySearhForm({super.key, required this.onSearch});
+  const TimezoneSearhForm({super.key, required this.onSearch});
   
   @override
-  State<CitySearhForm> createState() => _CitySearhFormState();
+  State<TimezoneSearhForm> createState() => _TimezoneSearhFormState();
 }
 
-class _CitySearhFormState extends State<CitySearhForm> {
+class _TimezoneSearhFormState extends State<TimezoneSearhForm> {
   final _formKey = GlobalKey<FormState>();
-  final cityNameCtrl = TextEditingController();
+  final timezonNameCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +21,13 @@ class _CitySearhFormState extends State<CitySearhForm> {
       child: Column(
         children: [
           TextFormField(
-            controller: cityNameCtrl,
+            controller: timezonNameCtrl,
             decoration: InputDecoration(
-              label: const Text('Enter a city name'),
+              label: const Text('Enter a timezone'),
               icon: ClickableAsset(
                 onTap: () {
                   if(_formKey.currentState!.validate()) {
-                    // Provider.of<CityModel>(context, listen: false)
-                    //   .changeCity(cityNameCtrl.value.text);
-                    widget.onSearch(cityNameCtrl.value.text);
+                    widget.onSearch(timezonNameCtrl.value.text);
                   }
                 }, 
                 assetPath: 'assets/icons/edit.svg'

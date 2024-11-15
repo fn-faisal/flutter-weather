@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/presentation/molecules/weather_badge_day.dart';
 import 'package:weather_app/presentation/molecules/weather_badge_hour.dart';
 import 'package:weather_app/utils/sizes.dart';
 
