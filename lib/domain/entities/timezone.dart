@@ -23,6 +23,13 @@ class Timezone {
     required this.url
   });
 
+  // Override equality operator
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is Timezone && other.id == id;
+  }
+
   factory Timezone.fromJson(Map<String, dynamic> json) => 
     _$TimezoneFromJson(json);
 

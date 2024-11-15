@@ -28,20 +28,46 @@ class TimezoneScreen extends StatelessWidget {
             ),
             Consumer<TimezoneModel>(
               builder: (_, state, __) =>
-                Column(
-                  children: [
-                    for ( final c in state.timezones ) 
-                      TimezoneCard(
-                        timezone: c,
-                        onTap: () {
-                          Provider.of<TimezoneModel>(context, listen: false)
-                            .changeSelectedTimezone(c);
-                          Navigator.of(context)
-                            .popUntil((r) => r.isFirst);
-                        },
-                      )
-                  ]
-                )
+                FutureBuilder(
+                  future: state.timezones, 
+                  builder: (tzCtx, tzSnapshot) {
+                    if (tzSnapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (tzSnapshot.hasError) {
+                      return Center(child: Text('Error: ${tzSnapshot.error}'));
+                    } else if (tzSnapshot.hasData && tzSnapshot.data != null) {
+                      return Column(
+                        children: [
+                          for ( final timezone in tzSnapshot.data! ) 
+                            TimezoneCard(
+                              timezone: timezone,
+                              onTap: () {
+                                Provider.of<TimezoneModel>(context, listen: false)
+                                  .changeSelectedTimezone(timezone);
+                                Navigator.of(context)
+                                  .popUntil((r) => r.isFirst);
+                              },
+                            )
+                        ],
+                      );
+                      // return ListView.builder(
+                      //   itemCount: tzSnapshot.data?.length ?? 0,
+                      //   itemBuilder: (itmCtx, itmIdx) => 
+                      //     TimezoneCard(
+                      //       timezone: tzSnapshot.data![itmIdx],
+                      //       onTap: () {
+                      //         Provider.of<TimezoneModel>(context, listen: false)
+                      //           .changeSelectedTimezone(tzSnapshot.data![itmIdx]);
+                      //         Navigator.of(context)
+                      //           .popUntil((r) => r.isFirst);
+                      //       },
+                      //     )
+                      // );
+                    } else {
+                      return const Center(child: Text('No data available'));
+                    }
+                  }
+                ),
             )
           ],
         ),
