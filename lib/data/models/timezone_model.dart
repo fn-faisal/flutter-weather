@@ -1,6 +1,7 @@
 
 import 'dart:collection';
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -11,7 +12,7 @@ class TimezoneModel extends ChangeNotifier {
 
   List<Timezone> _timezones = [];
 
-  Future<UnmodifiableListView<Timezone>> get timezones async {
+  Future<void> init() async {
     final prefs = await SharedPreferences.getInstance();
     final String? timezonesJson = prefs.getString('_savedTimezones');
 
@@ -19,9 +20,25 @@ class TimezoneModel extends ChangeNotifier {
       final List<dynamic> decodedList = jsonDecode(timezonesJson);
       _timezones = decodedList.map((json) => Timezone.fromJson(json)).toList();
     }
-  
-    return UnmodifiableListView(_timezones);
+    notifyListeners();
   }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    log('dispose');
+  }
+
+  // Method to save timezones when needed (e.g., on app close)
+  Future<void> saveState() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String timezonesJson = jsonEncode(_timezones.map((timezone) => timezone.toJson()).toList());
+    await prefs.setString('_savedTimezones', timezonesJson);
+  }
+
+  UnmodifiableListView<Timezone> get timezones => 
+    UnmodifiableListView(_timezones);
 
   Timezone? get selectedTimezone => _selectedTimezone;
 
@@ -40,8 +57,5 @@ class TimezoneModel extends ChangeNotifier {
   void addTimezone(Timezone timezone) async {
     _timezones.add(timezone);
     notifyListeners();
-    final prefs = await SharedPreferences.getInstance();
-    final String citiesJson = jsonEncode(_timezones.map((timezone) => timezone.toJson()).toList());
-    prefs.setString('_savedTimezones', citiesJson);
   }
 }

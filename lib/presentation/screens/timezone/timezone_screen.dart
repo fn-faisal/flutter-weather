@@ -9,7 +9,6 @@ class TimezoneScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screen = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Select a timezone'),
@@ -29,36 +28,22 @@ class TimezoneScreen extends StatelessWidget {
             ),
             Consumer<TimezoneModel>(
               builder: (_, state, __) =>
-                FutureBuilder(
-                  future: state.timezones, 
-                  builder: (tzCtx, tzSnapshot) {
-                    if (tzSnapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
-                    } else if (tzSnapshot.hasError) {
-                      return Center(child: Text('Error: ${tzSnapshot.error}'));
-                    } else if (tzSnapshot.hasData) {
-                      final timezones = tzSnapshot.data;
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: timezones?.length ?? 0,
-                        itemBuilder: (itmCtx, itmIdx) => 
-                          Align(
-                            alignment: Alignment.center,
-                            child: TimezoneCard(
-                              timezone: timezones![itmIdx],
-                              onTap: () {
-                                Provider.of<TimezoneModel>(context, listen: false)
-                                  .changeSelectedTimezone(timezones[itmIdx]);
-                                Navigator.of(context)
-                                  .popUntil((r) => r.isFirst);
-                              },
-                            ),
-                          )
-                      );
-                    } else {
-                      return const Center(child: Text('No data available'));
-                    }
-                  }
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: state.timezones.length,
+                  itemBuilder: (itmCtx, itmIdx) => 
+                    Align(
+                      alignment: Alignment.center,
+                      child: TimezoneCard(
+                        timezone: state.timezones[itmIdx],
+                        onTap: () {
+                          Provider.of<TimezoneModel>(context, listen: false)
+                            .changeSelectedTimezone(state.timezones[itmIdx]);
+                          Navigator.of(context)
+                            .popUntil((r) => r.isFirst);
+                        },
+                      ),
+                    )
                 ),
             )
           ],

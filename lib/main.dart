@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 import 'package:weather_app/core/bootstrap/notifier_providers.dart';
 import 'package:weather_app/core/bootstrap/use_cases.dart';
+import 'package:weather_app/utils/provider_persist.dart';
 
 import 'core/app.dart';
 
@@ -20,7 +21,9 @@ void main() async {
   runApp(
     MultiProvider(
       providers: providers,
-      child: const App(),
+      child: const ProviderPersist(
+        child: App()
+      ),
     )
   );
 }
