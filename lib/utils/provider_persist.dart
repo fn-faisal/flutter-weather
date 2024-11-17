@@ -13,13 +13,13 @@ class ProviderPersist extends StatefulWidget {
 
 class _ProviderPersistState extends State<ProviderPersist> {
   late final AppLifecycleListener _listener;
-  late AppLifecycleState? _state;
+  // late AppLifecycleState? _state;
 
   @override
   void initState() {
     super.initState();
     loadPersistedStates();
-    _state = SchedulerBinding.instance.lifecycleState;
+    // _state = SchedulerBinding.instance.lifecycleState;
 
     /**
      * Events:-

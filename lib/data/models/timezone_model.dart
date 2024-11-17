@@ -23,13 +23,6 @@ class TimezoneModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    log('dispose');
-  }
-
   // Method to save timezones when needed (e.g., on app close)
   Future<void> saveState() async {
     final prefs = await SharedPreferences.getInstance();
@@ -54,8 +47,16 @@ class TimezoneModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addTimezone(Timezone timezone) async {
+  void addTimezone(Timezone timezone) {
     _timezones.add(timezone);
+    notifyListeners();
+  }
+
+  void removeTimezone(Timezone timezone) {
+    _timezones.remove(timezone);
+    if ( selectedTimezone == timezone ) {
+      _selectedTimezone = null;
+    }
     notifyListeners();
   }
 }

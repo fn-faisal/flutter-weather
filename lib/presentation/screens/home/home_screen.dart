@@ -5,6 +5,7 @@ import 'package:weather_app/presentation/molecules/clickable_asset.dart';
 import 'package:weather_app/presentation/screens/home/widgets/hourly_weather.dart';
 import 'package:weather_app/presentation/screens/home/widgets/summary.dart';
 import 'package:weather_app/utils/sizes.dart';
+import 'package:flutter_gen/gen_l10n/messages_locales.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -20,7 +21,7 @@ class HomeScreen extends StatelessWidget {
         title: Row(
           children: [
             Consumer<TimezoneModel>(builder: (context, state, child){
-              return Text(state.selectedTimezone?.name ?? 'No Timezone Selected');
+              return Text(state.selectedTimezone?.name ?? MessagesLocales.of(context)!.no_tz_selected);
             }),
             Padding(
               padding: const EdgeInsets.only(left: Sizes.sm),
