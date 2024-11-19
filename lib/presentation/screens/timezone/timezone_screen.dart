@@ -9,6 +9,7 @@ class TimezoneScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Select a timezone'),
@@ -28,22 +29,26 @@ class TimezoneScreen extends StatelessWidget {
             ),
             Consumer<TimezoneModel>(
               builder: (_, state, __) =>
-                ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: state.timezones.length,
-                  itemBuilder: (itmCtx, itmIdx) => 
-                    Align(
-                      alignment: Alignment.center,
-                      child: TimezoneCard(
-                        timezone: state.timezones[itmIdx],
-                        onTap: () {
-                          Provider.of<TimezoneModel>(context, listen: false)
-                            .changeSelectedTimezone(state.timezones[itmIdx]);
-                          Navigator.of(context)
-                            .popUntil((r) => r.isFirst);
-                        },
-                      ),
-                    )
+                SizedBox(
+                  width: size.width / 1.5,
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: state.timezones.length,
+                    itemExtent: Sizes.xl * 2,
+                    itemBuilder: (itmCtx, itmIdx) => 
+                      Align(
+                        alignment: Alignment.center,
+                        child: TimezoneCard(
+                          timezone: state.timezones[itmIdx],
+                          onTap: () {
+                            Provider.of<TimezoneModel>(context, listen: false)
+                              .changeSelectedTimezone(state.timezones[itmIdx]);
+                            Navigator.of(context)
+                              .popUntil((r) => r.isFirst);
+                          },
+                        ),
+                      )
+                  ),
                 ),
             )
           ],

@@ -1,7 +1,0 @@
-{
-    "@@locale": "en",
-    "no_tz_selected": "No timezone selected",
-    "@no_tz_selected" : {
-        "description": "No tz message"
-    }
-}

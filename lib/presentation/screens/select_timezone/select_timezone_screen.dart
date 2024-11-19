@@ -75,6 +75,7 @@ class _SelectTimezoneState extends State<SelectTimezoneScreen> {
                 children: [
                   for ( var c in searchResult ) 
                     TimezoneCard(
+                      removeable: false,
                       timezone: c,
                       onTap: (){
                         Provider.of<TimezoneModel>(context, listen: false)

@@ -1,0 +1,9 @@
+{
+    "@@locale": "en",
+    "lbl_noTzSelected": "No timezone selected",
+    "@lbl_noTzSelected" : {
+        "description": "No tz message"
+    },
+    "lbl_remove": "Remove",
+    "@lbl_remove": {}
+}
