@@ -15,19 +15,29 @@ class TimezoneModel extends ChangeNotifier {
   Future<void> init() async {
     final prefs = await SharedPreferences.getInstance();
     final String? timezonesJson = prefs.getString('_savedTimezones');
+    final String? selectedTimezoneJson = prefs.getString('_selectedTimezone');
 
     if (timezonesJson != null) {
       final List<dynamic> decodedList = jsonDecode(timezonesJson);
       _timezones = decodedList.map((json) => Timezone.fromJson(json)).toList();
     }
+
+    if ( selectedTimezoneJson != null ) {
+      final decodedSelectedTimezone = jsonDecode(selectedTimezoneJson);
+      _selectedTimezone = Timezone.fromJson(decodedSelectedTimezone);
+    }
+
     notifyListeners();
   }
 
-  // Method to save timezones when needed (e.g., on app close)
   Future<void> saveState() async {
     final prefs = await SharedPreferences.getInstance();
     final String timezonesJson = jsonEncode(_timezones.map((timezone) => timezone.toJson()).toList());
     await prefs.setString('_savedTimezones', timezonesJson);
+
+    if ( _selectedTimezone != null ) {
+      await prefs.setString('_selectedTimezone', jsonEncode(_selectedTimezone!.toJson()));
+    }
   }
 
   UnmodifiableListView<Timezone> get timezones => 

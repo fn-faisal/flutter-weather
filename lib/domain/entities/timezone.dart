@@ -5,22 +5,22 @@ part 'timezone.g.dart';
 
 @JsonSerializable()
 class Timezone {
-  final int id;
+  final int? id;
   final String name;
   final String region;
   final String country;
   final double lat;
   final double lon;
-  final String url;
+  final String? url;
 
   Timezone({ 
-    required this.id,
+    this.id,
     required this.name,
     required this.region,
     required this.country,
     required this.lat,
     required this.lon,
-    required this.url
+    this.url
   });
 
   // Override equality operator

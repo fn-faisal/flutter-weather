@@ -3,7 +3,7 @@ import 'package:weather_app/domain/entities/timezone.dart';
 import 'package:weather_app/domain/repositories/i_timezone_repository.dart';
 import 'package:weather_app/utils/getWeatherDio.dart';
 
-class TimezoneHttpRepository extends ITimezoneRepository {
+class TimezoneHttpRepository implements ITimezoneRepository {
   @override
   Future<List<Timezone>> findByName(String name) {
     final dio = getWeatherDio();
