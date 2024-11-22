@@ -57,9 +57,15 @@ class _WeatherApi implements WeatherApi {
   }
 
   @override
-  Future<CurrentTemperature> current(String q) async {
+  Future<CurrentTemperature> current(
+    String q,
+    int days,
+  ) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'q': q};
+    final queryParameters = <String, dynamic>{
+      r'q': q,
+      r'days': days,
+    };
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<CurrentTemperature>(Options(

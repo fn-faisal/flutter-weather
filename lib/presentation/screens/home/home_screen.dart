@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _fetchCurrentTemperature(String timezone) async {
     try {
       final result = await Provider.of<CurrentTemperatureFromTimezoneUseCase>(context, listen: false)
-          .execute(timezone);
+          .execute(timezone: timezone, days: 7);
       setState(() {
         currentTemperature = result;
         errorMessage = null;

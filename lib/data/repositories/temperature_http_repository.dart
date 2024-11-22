@@ -6,10 +6,10 @@ import 'package:weather_app/utils/get_weather_dio.dart';
 
 class TemperatureHttpRepository implements ITemperatureRepository {
   @override
-  Future<CurrentTemperature> findByTimezone(String timezone) {
+  Future<CurrentTemperature> findByTimezone(String timezone, { int days = 1 }) {
     final dio = getWeatherDio();
     final client = WeatherApi(dio);
-    return client.current(timezone);
+    return client.current(timezone, days);
   }
 
 }
