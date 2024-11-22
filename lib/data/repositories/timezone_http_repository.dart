@@ -1,7 +1,7 @@
 import 'package:weather_app/data/api/weather_api.dart';
 import 'package:weather_app/domain/entities/timezone.dart';
 import 'package:weather_app/domain/repositories/i_timezone_repository.dart';
-import 'package:weather_app/utils/getWeatherDio.dart';
+import 'package:weather_app/utils/get_weather_dio.dart';
 
 class TimezoneHttpRepository implements ITimezoneRepository {
   @override

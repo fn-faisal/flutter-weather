@@ -10,10 +10,12 @@ CurrentTemperature _$CurrentTemperatureFromJson(Map<String, dynamic> json) =>
     CurrentTemperature(
       current: Temperature.fromJson(json['current'] as Map<String, dynamic>),
       location: Timezone.fromJson(json['location'] as Map<String, dynamic>),
+      forecast: Forecast.fromJson(json['forecast'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$CurrentTemperatureToJson(CurrentTemperature instance) =>
     <String, dynamic>{
       'current': instance.current,
       'location': instance.location,
+      'forecast': instance.forecast,
     };

@@ -34,4 +34,9 @@ class Timezone {
     _$TimezoneFromJson(json);
 
   Map<String, dynamic> toJson() => _$TimezoneToJson(this);
+  
+  @override
+  int get hashCode => Object.hash(id, name, country, lat, lon);
+  
+  
 }

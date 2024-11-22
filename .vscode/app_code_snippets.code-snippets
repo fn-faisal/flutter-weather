@@ -1,0 +1,46 @@
+{
+	// Place your weather_app workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"scope": "javascript,typescript",
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"Seriablizable To/From Json": {
+		"scope": "dart",
+		"prefix": "s_json",
+		"body": [
+			"factory $1.fromJson(Map<String, dynamic> json)",
+			"\t=> _$$1FromJson(json);",
+			"",
+			"Map<String, dynamic> toJson()",
+			"\t=> _$$1ToJson(this);"
+		]
+	},
+	"Create a use case": {
+		"scope": "dart",
+		"prefix": "useCase",
+		"body": [
+			"import 'package:weather_app/domain/use_cases/i_use_case.dart';",
+			"\n",
+			"class $1UseCase implements IUseCase<$2, $3> {",
+			"\t$1UseCase({});",
+			"",
+			"\t@override",
+			"\tFuture<$2> execute($3 payload) {",
+			"\t\t// return $2",
+			"\t}",
+			"}"
+		],
+		"description": "Create a use case"
+	}
+}

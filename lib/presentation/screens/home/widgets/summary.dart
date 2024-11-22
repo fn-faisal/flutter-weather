@@ -28,7 +28,7 @@ class Summary extends StatelessWidget {
                   Text(currentTemperature.current.condition.text, style: const TextStyle( fontSize: Sizes.md )),
                   const SizedBox(height: 12.0, width: 10, child: Text(' : '),),
                   if(currentTemperature.current.feelsLikeCelsius != null)
-                    Text('Feels like ${currentTemperature.current.feelsLikeCelsius}\'C', style: TextStyle( fontSize: Sizes.md )),
+                    Text('Feels like ${currentTemperature.current.feelsLikeCelsius}\'C', style: const TextStyle( fontSize: Sizes.md )),
                 ],
               )
             ],

@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 
 import 'package:retrofit/retrofit.dart';
 import 'package:weather_app/domain/entities/current_temperature.dart';
-import 'package:weather_app/domain/entities/temprature.dart';
 import 'package:weather_app/domain/entities/timezone.dart';
 
 part 'weather_api.g.dart';
@@ -14,6 +13,6 @@ abstract class WeatherApi {
   @GET('/search.json')
   Future<List<Timezone>> search(@Query('q') String q);
 
-  @GET('/current.json')
+  @GET('/forecast.json')
   Future<CurrentTemperature> current(@Query('q') String q);
 }

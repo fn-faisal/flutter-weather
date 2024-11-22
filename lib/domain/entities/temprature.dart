@@ -1,9 +1,6 @@
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:weather_app/domain/entities/aqi.dart';
 import 'package:weather_app/domain/entities/condition.dart';
-import 'package:weather_app/utils/bool_from_int.dart';
-import 'package:weather_app/utils/bool_to_int.dart';
 
 part 'temprature.g.dart';
 

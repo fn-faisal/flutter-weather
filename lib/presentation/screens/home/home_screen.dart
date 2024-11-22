@@ -33,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         errorMessage = error.toString();
       });
+      throw error;
     }
   }
 
@@ -75,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
             if (errorMessage != null) {
               return Text('Error: $errorMessage');
             } else if (currentTemperature == null) {
-              return lastTimezone == null ? const Text('Please select a timezone.') : CircularProgressIndicator();
+              return lastTimezone == null ? const Text('Please select a timezone.') : const CircularProgressIndicator();
             } else {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

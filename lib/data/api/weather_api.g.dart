@@ -69,7 +69,7 @@ class _WeatherApi implements WeatherApi {
     )
         .compose(
           _dio.options,
-          '/current.json',
+          '/forecast.json',
           queryParameters: queryParameters,
           data: _data,
         )
