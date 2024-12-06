@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_app/data/models/timezone_model.dart';
@@ -7,6 +8,7 @@ import 'package:weather_app/presentation/molecules/clickable_asset.dart';
 import 'package:weather_app/presentation/molecules/weather_search_bar.dart';
 import 'package:weather_app/presentation/screens/home/widgets/weekly_weather.dart';
 import 'package:weather_app/presentation/screens/home/widgets/summary.dart';
+import 'package:weather_app/presentation/templates/home_page_template.dart';
 import 'package:weather_app/utils/sizes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -51,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
     //   _fetchCurrentTemperature(selectedTimezone);
     // }
 
-    return Scaffold(
+    return const Scaffold(
       // appBar: AppBar(
       //   title: Row(
       //     children: [
@@ -69,17 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
       //     ],
       //   ),
       // ),
-      body: Container(
-        padding: const EdgeInsets.only(
-          top: Sizes.lg * 2,
-          left: Sizes.lg,
-          right: Sizes.lg
-        ),
-        child: const Wrap(
-          children: [
-            WeatherSearchBar(placeholder: 'Search...'),
-          ],
-        ),
+      body: HomePageTemplate(searchBarPlaceholder: 'Search Location'),
         // child: Builder(
         //   builder: (context) {
         //     if (errorMessage != null) {
@@ -98,7 +90,6 @@ class _HomeScreenState extends State<HomeScreen> {
         //     }            
         //   }
         // ),
-      ),
     );
   }
 }
