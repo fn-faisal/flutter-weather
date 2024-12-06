@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app/presentation/molecules/clickable_asset.dart';
+import 'package:weather_app/utils/sizes.dart';
 
 class WeatherSearchBar extends StatelessWidget {
 
@@ -11,7 +12,7 @@ class WeatherSearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SearchBar(
       padding: const WidgetStatePropertyAll(
-      EdgeInsets.only( left: 12.5, right: 20 )),
+        EdgeInsets.only( left: Sizes.md, right: Sizes.lg )),
       backgroundColor: WidgetStatePropertyAll(Colors.grey[50]),
       elevation: const WidgetStatePropertyAll(0.0),
       hintText: placeholder,

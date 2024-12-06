@@ -51,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
     //   _fetchCurrentTemperature(selectedTimezone);
     // }
 
-    return const Scaffold(
+    return Scaffold(
       // appBar: AppBar(
       //   title: Row(
       //     children: [
@@ -69,8 +69,17 @@ class _HomeScreenState extends State<HomeScreen> {
       //     ],
       //   ),
       // ),
-      body: Center(
-        child: WeatherSearchBar(placeholder: 'Search...'),
+      body: Container(
+        padding: const EdgeInsets.only(
+          top: Sizes.lg * 2,
+          left: Sizes.lg,
+          right: Sizes.lg
+        ),
+        child: const Wrap(
+          children: [
+            WeatherSearchBar(placeholder: 'Search...'),
+          ],
+        ),
         // child: Builder(
         //   builder: (context) {
         //     if (errorMessage != null) {
