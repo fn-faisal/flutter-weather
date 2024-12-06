@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:weather_app/presentation/organism/forecast_list_item.dart';
+import 'package:weather_app/utils/get_screen_size.dart';
 import 'package:weather_app/utils/sizes.dart';
 
 class ForecastListSlider extends StatefulWidget {
@@ -18,6 +20,7 @@ class _ForecastListSliderState extends State<ForecastListSlider> {
   @override
   Widget build(BuildContext context) {
     List<int> items = [1, 2, 3];
+    var screenSize = getScreenSize(context);
     return Wrap(
       children: [
         Center(
@@ -31,23 +34,10 @@ class _ForecastListSliderState extends State<ForecastListSlider> {
             ),
           ),
         ),
-        // Center(
-        //   child: Padding(
-        //     padding: const EdgeInsets.symmetric(
-        //       vertical: Sizes.lg
-        //     ),
-        //     child: DotsIndicator(
-        //       decorator: const DotsDecorator(
-        //         activeSize: Size.fromWidth(10),
-        //         size: Size( Sizes.md, Sizes.md )
-        //       ),
-        //       dotsCount: items.length,
-        //       position: currentIndex,
-        //     ),
-        //   ),
-        // ),
         CarouselSlider(
           options: CarouselOptions(
+            enlargeCenterPage: true,
+            height: screenSize.height / 1.25,
             onPageChanged: (idx, reason) {
               setState(() {
                 currentIndex = idx;
@@ -56,13 +46,14 @@ class _ForecastListSliderState extends State<ForecastListSlider> {
             // height: Sizes.lg
           ),
           items: items.map(
-            (weather) {
-              return Builder(
-                builder: (context) {
-                  return const Text('Hello');
-                }
-              );
-            }
+            (weather) => Builder(
+              builder: (context) => Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: Sizes.lg * 1.5
+                ),
+                child: const ForecastListItem()
+              )
+            )
           ).toList(),
         ),
       ],

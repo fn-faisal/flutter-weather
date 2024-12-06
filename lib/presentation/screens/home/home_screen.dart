@@ -71,7 +71,9 @@ class _HomeScreenState extends State<HomeScreen> {
       //     ],
       //   ),
       // ),
-      body: HomePageTemplate(searchBarPlaceholder: 'Search Location'),
+      body: HomePageTemplate(
+        searchBarPlaceholder: 'Search Location'
+      ),
         // child: Builder(
         //   builder: (context) {
         //     if (errorMessage != null) {

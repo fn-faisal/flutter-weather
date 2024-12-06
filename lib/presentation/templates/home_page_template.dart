@@ -15,20 +15,20 @@ class HomePageTemplate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: const EdgeInsets.only(
-          top: Sizes.lg * 2,
-          left: Sizes.lg,
-          right: Sizes.lg
+    return Wrap(
+      children: [
+        Container(
+          padding: EdgeInsets.only(
+            top: Sizes.xl,
+            left: Sizes.lg,
+            right: Sizes.lg
+          ),
+          child: WeatherSearchBar(placeholder: searchBarPlaceholder)
         ),
-        child: Wrap(
-          children: [
-            WeatherSearchBar(placeholder: searchBarPlaceholder),
-            const ForecastListSlider(
-              
-            )
-          ],
-      )
-    );
+        const ForecastListSlider(
+          
+        )
+      ],
+          );
   }
 }
