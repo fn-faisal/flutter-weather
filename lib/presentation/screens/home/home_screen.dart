@@ -4,7 +4,8 @@ import 'package:weather_app/data/models/timezone_model.dart';
 import 'package:weather_app/domain/entities/current_temperature.dart';
 import 'package:weather_app/domain/use_cases/current_temperature_from_timezone_use_case.dart';
 import 'package:weather_app/presentation/molecules/clickable_asset.dart';
-import 'package:weather_app/presentation/screens/home/widgets/hourly_weather.dart';
+import 'package:weather_app/presentation/molecules/weather_search_bar.dart';
+import 'package:weather_app/presentation/screens/home/widgets/weekly_weather.dart';
 import 'package:weather_app/presentation/screens/home/widgets/summary.dart';
 import 'package:weather_app/utils/sizes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -31,9 +32,8 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     } catch (error) {
       setState(() {
-        errorMessage = error.toString();
+        errorMessage = 'An error occurred';
       });
-      throw error;
     }
   }
 
@@ -43,52 +43,52 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {  
-    final selectedTimezone = context.select<TimezoneModel, String?>((provider) => provider.selectedTimezone?.name);
+    // final selectedTimezone = context.select<TimezoneModel, String?>((provider) => provider.selectedTimezone?.name);
 
     // Only fetch if selectedTimezone is non-null and changed
-    if (selectedTimezone != null && selectedTimezone != lastTimezone) {
-      lastTimezone = selectedTimezone;
-      _fetchCurrentTemperature(selectedTimezone);
-    }
+    // if (selectedTimezone != null && selectedTimezone != lastTimezone) {
+    //   lastTimezone = selectedTimezone;
+    //   _fetchCurrentTemperature(selectedTimezone);
+    // }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          children: [
-              Text(lastTimezone ?? AppLocalizations.of(context)!.lbl_noTzSelected
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: Sizes.sm),
-              child: ClickableAsset(
-                onTap: () {
-                  onTapTimezone(context);
-                }, 
-                assetPath: 'assets/icons/edit.svg',
-                color: Colors.grey
-              )
-            )
-          ],
-        ),
-      ),
+    return const Scaffold(
+      // appBar: AppBar(
+      //   title: Row(
+      //     children: [
+      //       // Text(lastTimezone ?? AppLocalizations.of(context)!.lbl_noTzSelected),
+      //       Padding(
+      //         padding: const EdgeInsets.only(left: Sizes.sm),
+      //         child: ClickableAsset(
+      //           onTap: () {
+      //             onTapTimezone(context);
+      //           }, 
+      //           assetPath: 'assets/icons/edit.svg',
+      //           color: Colors.grey
+      //         )
+      //       )
+      //     ],
+      //   ),
+      // ),
       body: Center(
-        child: Builder(
-          builder: (context) {
-            if (errorMessage != null) {
-              return Text('Error: $errorMessage');
-            } else if (currentTemperature == null) {
-              return lastTimezone == null ? const Text('Please select a timezone.') : const CircularProgressIndicator();
-            } else {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Summary( currentTemperature: currentTemperature!),
-                  const HourlyWeather(),
-                  const Text('AQI'),
-                ],
-              );
-            }            
-          }
-        ),
+        child: WeatherSearchBar(placeholder: 'Search...'),
+        // child: Builder(
+        //   builder: (context) {
+        //     if (errorMessage != null) {
+        //       return Text('Error: $errorMessage');
+        //     } else if (currentTemperature == null) {
+        //       return lastTimezone == null ? const Text('Please select a timezone.') : const CircularProgressIndicator();
+        //     } else {
+        //       return Column(
+        //         crossAxisAlignment: CrossAxisAlignment.center,
+        //         children: [
+        //           Summary( currentTemperature: currentTemperature!),
+        //           // const HourlyWeather(),
+        //           const Text('AQI'),
+        //         ],
+        //       );
+        //     }            
+        //   }
+        // ),
       ),
     );
   }
