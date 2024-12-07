@@ -9,10 +9,12 @@ import 'package:weather_app/utils/sizes.dart';
 class HomePageTemplate extends StatelessWidget {
 
   final String searchBarPlaceholder;
+  final Future<List<String>> Function(String) onSearchTimezone;
 
   const HomePageTemplate({
     super.key, 
     required this.searchBarPlaceholder,
+    required this.onSearchTimezone
   });
 
   @override
@@ -27,12 +29,7 @@ class HomePageTemplate extends StatelessWidget {
           ),
           child: WeatherSearchBar(
             placeholder: searchBarPlaceholder,
-            onSearch: ( String query ) async {
-              List<String> suggestions = [
-                "Karachi/Pakistan",
-              ];
-              return suggestions.where((s) => s.toLowerCase().startsWith(query.toLowerCase())).toList();
-            },
+            onSearch: onSearchTimezone,
           )
         ),
         const ForecastListSlider(

@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
     //   _fetchCurrentTemperature(selectedTimezone);
     // }
 
-    return const Scaffold(
+    return Scaffold(
       // appBar: AppBar(
       //   title: Row(
       //     children: [
@@ -72,7 +72,13 @@ class _HomeScreenState extends State<HomeScreen> {
       //   ),
       // ),
       body: HomePageTemplate(
-        searchBarPlaceholder: 'Search Location'
+        searchBarPlaceholder: 'Search Location',
+        onSearchTimezone: (query) async {
+          List<String> suggestions = [
+            "Karachi/Pakistan",
+          ];
+          return suggestions.where((s) => s.toLowerCase().startsWith(query.toLowerCase())).toList();
+        },
       ),
         // child: Builder(
         //   builder: (context) {
