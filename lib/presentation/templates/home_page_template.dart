@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_app/presentation/molecules/weather_search_bar.dart';
@@ -18,12 +20,20 @@ class HomePageTemplate extends StatelessWidget {
     return Wrap(
       children: [
         Container(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
             top: Sizes.xl,
             left: Sizes.lg,
             right: Sizes.lg
           ),
-          child: WeatherSearchBar(placeholder: searchBarPlaceholder)
+          child: WeatherSearchBar(
+            placeholder: searchBarPlaceholder,
+            onSearch: ( String query ) async {
+              List<String> suggestions = [
+                "Karachi/Pakistan",
+              ];
+              return suggestions.where((s) => s.toLowerCase().startsWith(query.toLowerCase())).toList();
+            },
+          )
         ),
         const ForecastListSlider(
           

@@ -1,19 +1,15 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:debounce_throttle/debounce_throttle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:weather_app/utils/sizes.dart';
 
-List<String> _suggestions = [
-  "Karachi/Pakistan",
-];
-
 class WeatherSearchBar extends StatefulWidget {
 
   final String placeholder;
+  final Future<List<String>> Function(String) onSearch;
 
-  const WeatherSearchBar({super.key, required this.placeholder});
+  const WeatherSearchBar({super.key, required this.placeholder, required this.onSearch});
 
   @override
   State<WeatherSearchBar> createState() => _WeatherSearchBarState();
@@ -40,7 +36,7 @@ class _WeatherSearchBarState extends State<WeatherSearchBar> {
     if ( query.isEmpty ) {
       return [];
     }
-    return _suggestions.where((s) => s.toLowerCase().startsWith(query.toLowerCase())).toList();
+    return await widget.onSearch(query);
   }
 
   @override
