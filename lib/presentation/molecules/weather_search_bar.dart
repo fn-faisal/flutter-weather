@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:debounce_throttle/debounce_throttle.dart';
 import 'package:flutter/material.dart';
 
@@ -61,16 +62,22 @@ class _WeatherSearchBarState extends State<WeatherSearchBar> {
         ),
       suggestionsBuilder: (context, controller) async { 
         _debouncer.value = controller.text;
-        _completer = new Completer();
+        _completer = Completer();
         return [FutureBuilder(
           future: _completer.future, 
           builder: (context, snapshot){ 
             final data = snapshot.data;
-            if ( isLoading )
-              return CircularProgressIndicator();
-            
-            if ( data == null )
-              return Text('No results');
+            if ( isLoading ) {
+              return const CircularProgressIndicator();
+            }
+            if ( data == null || data.isEmpty ) {
+              return ListTile(
+                title: const Text('No results'),
+                onTap: () {
+                  searchController.closeView('');
+                },
+              );
+            }
             return ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
