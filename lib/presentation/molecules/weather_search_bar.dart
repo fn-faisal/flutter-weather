@@ -2,18 +2,11 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:debounce_throttle/debounce_throttle.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:weather_app/utils/sizes.dart';
 
 List<String> _suggestions = [
-  "Sunny",
-  "Cloudy",
-  "Rainy",
-  "Thunderstorms",
-  "Snow",
-  "Foggy",
-  "Windy",
-  "Overcast",
-  "Partly Cloudy",
-  "Freezing Rain",
+  "Karachi/Pakistan",
 ];
 
 class WeatherSearchBar extends StatefulWidget {
@@ -33,7 +26,7 @@ class _WeatherSearchBarState extends State<WeatherSearchBar> {
 
   Completer<List<String>> _completer = Completer();
 
-  late final Debouncer _debouncer = Debouncer(const Duration(milliseconds: 300),
+  late final Debouncer _debouncer = Debouncer(const Duration(seconds: 1),
     initialValue: '',
     onChanged: (value) {
       _completer.complete(_fetchSuggestions(value)); // call the API endpoint
@@ -41,6 +34,12 @@ class _WeatherSearchBarState extends State<WeatherSearchBar> {
   );
 
   Future<List<String>> _fetchSuggestions(String query) async {
+    setState(() {
+      isLoading = false;
+    });
+    if ( query.isEmpty ) {
+      return [];
+    }
     return _suggestions.where((s) => s.toLowerCase().startsWith(query.toLowerCase())).toList();
   }
 
@@ -53,14 +52,45 @@ class _WeatherSearchBarState extends State<WeatherSearchBar> {
   @override
   Widget build(BuildContext context) {
     return SearchAnchor(
+      viewHintText: widget.placeholder,
+      viewBackgroundColor: Colors.white,
       searchController: searchController,  
       builder: (context, controller) => 
         SearchBar(
+          padding: const WidgetStatePropertyAll(
+            EdgeInsets.only(
+              left: Sizes.md
+            )
+          ),
+          hintText: widget.placeholder,
+          overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+          backgroundColor: const WidgetStatePropertyAll(Colors.white),
+          elevation: const WidgetStatePropertyAll(0),
+          trailing: [
+            Padding(
+              padding: const EdgeInsets.only(
+                right: Sizes.lg
+              ),
+              child: SvgPicture.asset(
+                'assets/icons/search.svg',
+                colorFilter: const ColorFilter.mode(
+                  Colors.grey,
+                  BlendMode.srcIn
+                ),
+              ),
+            ),
+          ],
+          side:  const WidgetStatePropertyAll(BorderSide(
+            color: Colors.grey
+          )),
           controller: controller,
           onTap: () => searchController.openView(),
           onChanged: (_) => searchController.openView(),
         ),
       suggestionsBuilder: (context, controller) async { 
+        setState(() {
+          isLoading = true;
+        });
         _debouncer.value = controller.text;
         _completer = Completer();
         return [FutureBuilder(
@@ -68,7 +98,9 @@ class _WeatherSearchBarState extends State<WeatherSearchBar> {
           builder: (context, snapshot){ 
             final data = snapshot.data;
             if ( isLoading ) {
-              return const CircularProgressIndicator();
+              return const ListTile(
+                title: Wrap(children: [Center(child: CircularProgressIndicator())]),
+              );
             }
             if ( data == null || data.isEmpty ) {
               return ListTile(
