@@ -8,8 +8,14 @@ class WeatherSearchBar extends StatefulWidget {
 
   final String placeholder;
   final Future<List<String>> Function(String) onSearch;
+  final void Function(String)? onSelectTimezone;
 
-  const WeatherSearchBar({super.key, required this.placeholder, required this.onSearch});
+  const WeatherSearchBar({
+    super.key, 
+    required this.placeholder, 
+    required this.onSearch,
+    this.onSelectTimezone
+  });
 
   @override
   State<WeatherSearchBar> createState() => _WeatherSearchBarState();
@@ -116,6 +122,9 @@ class _WeatherSearchBarState extends State<WeatherSearchBar> {
                     title: Text(data[index]),
                     onTap: () {
                       searchController.closeView(data[index]);
+                      if ( widget.onSelectTimezone != null ) {
+                        widget.onSelectTimezone!(data[index]);
+                      }
                     },
                   ),
                 );

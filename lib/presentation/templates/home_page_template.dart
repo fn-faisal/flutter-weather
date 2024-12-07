@@ -10,32 +10,37 @@ class HomePageTemplate extends StatelessWidget {
 
   final String searchBarPlaceholder;
   final Future<List<String>> Function(String) onSearchTimezone;
+  final void Function(String)? onSelectTimezone;
 
   const HomePageTemplate({
     super.key, 
     required this.searchBarPlaceholder,
-    required this.onSearchTimezone
+    required this.onSearchTimezone,
+    this.onSelectTimezone
   });
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      children: [
-        Container(
-          padding: const EdgeInsets.only(
-            top: Sizes.xl,
-            left: Sizes.lg,
-            right: Sizes.lg
+    return Scaffold(
+      body: Wrap(
+        children: [
+          Container(
+            padding: const EdgeInsets.only(
+              top: Sizes.xl,
+              left: Sizes.lg,
+              right: Sizes.lg
+            ),
+            child: WeatherSearchBar(
+              placeholder: searchBarPlaceholder,
+              onSearch: onSearchTimezone,
+              onSelectTimezone: onSelectTimezone,
+            )
           ),
-          child: WeatherSearchBar(
-            placeholder: searchBarPlaceholder,
-            onSearch: onSearchTimezone,
+          const ForecastListSlider(
+            
           )
-        ),
-        const ForecastListSlider(
-          
-        )
-      ],
+        ],
+      ),
     );
   }
 }
