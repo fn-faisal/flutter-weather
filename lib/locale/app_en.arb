@@ -5,5 +5,25 @@
         "description": "No tz message"
     },
     "lbl_remove": "Remove",
-    "@lbl_remove": {}
+    "@lbl_remove": {},
+    "btn_txt_add_timezone": "Add Timezone +",
+    "@btn_txt_add_timezone": {
+        "description": "Add timezone button text"
+    },
+    "lbl_txt_time": "Time",
+    "@lbl_txt_time": {
+        "description": "Time label text"
+    },
+    "lbl_txt_uv": "UV",
+    "@lbl_txt_uv": {
+        "description": "UV label text"
+    },
+    "lbl_txt_rain_percentage": "% Rain",
+    "@lbl_txt_rain_percentage": {
+        "description": "Rain chances label text"
+    },
+    "lbl_txt_aq": "AQ",
+    "@lbl_txt_aq": {
+        "description": "AQ label text"
+    }
 }

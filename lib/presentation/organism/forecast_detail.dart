@@ -1,47 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:weather_app/presentation/molecules/forecast_card.dart';
 import 'package:weather_app/presentation/molecules/forecast_hourly_chart.dart';
 import 'package:weather_app/presentation/molecules/forecast_info_item.dart';
 import 'package:weather_app/utils/sizes.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class ForecastListItem extends StatelessWidget {
-  const ForecastListItem({super.key});
+class ForecastDetail extends StatelessWidget {
+  const ForecastDetail({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
+    return SingleChildScrollView(
       child: Column(
         children: [
-          ForecastCard(),
-          SizedBox(
+          const ForecastCard(),
+          const SizedBox(
             height: Sizes.xl,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ForecastInfoItem(
-                label: 'Time', 
+                label: AppLocalizations.of(context)!.lbl_txt_time, 
                 value: '11:00 AM'
               ),
               ForecastInfoItem(
-                label: 'UV', 
+                label: AppLocalizations.of(context)!.lbl_txt_uv, 
                 value: '4'
               ),
               ForecastInfoItem(
-                label: 'Rain Changes', 
+                label: AppLocalizations.of(context)!.lbl_txt_rain_percentage, 
                 value: '5%'
               ),
               ForecastInfoItem(
-                label: 'AQ', 
+                label: AppLocalizations.of(context)!.lbl_txt_aq, 
                 value: '22'
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: Sizes.xl,
           ),
-          ForecastHourlyChart()
+          const ForecastHourlyChart()
         ]
       ),
     );

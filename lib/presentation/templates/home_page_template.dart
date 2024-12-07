@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_app/presentation/molecules/weather_search_bar.dart';
 import 'package:weather_app/presentation/organism/forecast_list_slider.dart';

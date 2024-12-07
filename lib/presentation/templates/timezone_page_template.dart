@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/presentation/organism/forecast_list_item.dart';
+import 'package:weather_app/presentation/organism/forecast_detail.dart';
 import 'package:weather_app/utils/sizes.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TimezonePageTemplate extends StatelessWidget {
   final String appBarTitleText;
@@ -28,7 +29,9 @@ class TimezonePageTemplate extends StatelessWidget {
                 foregroundColor: WidgetStatePropertyAll(Colors.white)
               ),
               onPressed: onSaveTimezone, 
-              child: const Text("Add +")
+              child: Text(
+                AppLocalizations.of(context)!.btn_txt_add_timezone
+              )
             ),
           )
         ],
@@ -40,7 +43,7 @@ class TimezonePageTemplate extends StatelessWidget {
               vertical: Sizes.md,
               horizontal: Sizes.xl
             ),
-            child: ForecastListItem(),
+            child: ForecastDetail(),
           ),
         ],
       ),

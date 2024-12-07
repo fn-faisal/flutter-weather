@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:weather_app/presentation/organism/forecast_list_item.dart';
+import 'package:weather_app/presentation/organism/forecast_detail.dart';
 import 'package:weather_app/utils/get_screen_size.dart';
 import 'package:weather_app/utils/sizes.dart';
 
@@ -55,7 +55,7 @@ class _ForecastListSliderState extends State<ForecastListSlider> {
                 padding: const EdgeInsets.symmetric(
                   horizontal: Sizes.lg * 1.75
                 ),
-                child: const ForecastListItem()
+                child: const ForecastDetail()
               )
             )
           ).toList(),
