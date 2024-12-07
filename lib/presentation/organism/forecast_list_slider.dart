@@ -37,7 +37,7 @@ class _ForecastListSliderState extends State<ForecastListSlider> {
         CarouselSlider(
           options: CarouselOptions(
             enlargeCenterPage: true,
-            height: screenSize.height / 1.25,
+            height: screenSize.height,
             onPageChanged: (idx, reason) {
               setState(() {
                 currentIndex = idx;
@@ -48,8 +48,12 @@ class _ForecastListSliderState extends State<ForecastListSlider> {
           items: items.map(
             (weather) => Builder(
               builder: (context) => Container(
+                width: screenSize.width,
+                constraints: BoxConstraints(
+                  minWidth: screenSize.width
+                ),
                 padding: const EdgeInsets.symmetric(
-                  horizontal: Sizes.lg * 1.5
+                  horizontal: Sizes.lg * 1.75
                 ),
                 child: const ForecastListItem()
               )
