@@ -89,7 +89,9 @@ class ForecastHourlyChart extends StatelessWidget {
                   isCurved: true,
                   // colors: [Colors.blue],
                   barWidth: 4,
-                  dotData: FlDotData(show: true),
+                  dotData: FlDotData(
+                    show: true,
+                  ),
                   belowBarData: BarAreaData(
                     show: true,
                     gradient: LinearGradient(
