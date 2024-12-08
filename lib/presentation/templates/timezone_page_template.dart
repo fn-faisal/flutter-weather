@@ -36,16 +36,12 @@ class TimezonePageTemplate extends StatelessWidget {
           )
         ],
       ),
-      body: const Wrap(
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: Sizes.md,
-              horizontal: Sizes.xl
-            ),
-            child: ForecastDetail(),
-          ),
-        ],
+      body: const Padding(
+        padding: EdgeInsets.symmetric(
+          // vertical: Sizes.md,
+          horizontal: Sizes.xl
+        ),
+        child: ForecastDetail(),
       ),
     );
   }
