@@ -31,8 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  void onTapTimezone (BuildContext context) {
-    Navigator.pushNamed(context, '/timezone');
+  void onTapTimezone (BuildContext context, String timezone) {
+    Navigator.pushNamed(context, '/timezone', arguments: timezone);
   }
 
   @override
@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return HomePageTemplate(
       searchBarPlaceholder: 'Search Location',
       onSelectTimezone: (timezone) {
-        Navigator.pushNamed(context, '/timezone');
+        onTapTimezone(context, timezone);
       },
       onSearchTimezone: (query) async {
         List<String> suggestions = [

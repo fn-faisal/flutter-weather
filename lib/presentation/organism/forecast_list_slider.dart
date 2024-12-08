@@ -20,8 +20,7 @@ class _ForecastListSliderState extends State<ForecastListSlider> {
   @override
   Widget build(BuildContext context) {
     List<int> items = [1, 2, 3];
-    var screenSize = getScreenSize(context);
-    return Wrap(
+    return Column(
       children: [
         Center(
           child: Padding(
@@ -37,7 +36,7 @@ class _ForecastListSliderState extends State<ForecastListSlider> {
         CarouselSlider(
           options: CarouselOptions(
             enlargeCenterPage: true,
-            height: screenSize.height,
+            viewportFraction: 0.9,
             onPageChanged: (idx, reason) {
               setState(() {
                 currentIndex = idx;
@@ -48,12 +47,8 @@ class _ForecastListSliderState extends State<ForecastListSlider> {
           items: items.map(
             (weather) => Builder(
               builder: (context) => Container(
-                width: screenSize.width,
-                constraints: BoxConstraints(
-                  minWidth: screenSize.width
-                ),
                 padding: const EdgeInsets.symmetric(
-                  horizontal: Sizes.lg * 1.75
+                  horizontal: Sizes.md
                 ),
                 child: const ForecastDetail()
               )

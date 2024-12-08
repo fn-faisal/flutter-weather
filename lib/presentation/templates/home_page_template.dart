@@ -35,9 +35,7 @@ class HomePageTemplate extends StatelessWidget {
               onSelectTimezone: onSelectTimezone,
             )
           ),
-          const ForecastListSlider(
-            
-          )
+          const ForecastListSlider()
         ],
       ),
     );
