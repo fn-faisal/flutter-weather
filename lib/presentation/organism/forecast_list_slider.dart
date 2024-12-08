@@ -37,6 +37,8 @@ class _ForecastListSliderState extends State<ForecastListSlider> {
           options: CarouselOptions(
             enlargeCenterPage: true,
             viewportFraction: 0.9,
+            // height: double.infinity,
+            height: getScreenSize(context).height,
             onPageChanged: (idx, reason) {
               setState(() {
                 currentIndex = idx;
