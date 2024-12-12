@@ -12,6 +12,12 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Weather App',
       initialRoute: '/',
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white
+        )
+      ),
       routes: Routes.guestRoutes,
       localizationsDelegates: const [
         AppLocalizations.delegate,
