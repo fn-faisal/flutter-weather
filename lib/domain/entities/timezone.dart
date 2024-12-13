@@ -30,6 +30,10 @@ class Timezone {
     return other is Timezone && other.id == id;
   }
 
+  @override String toString() {
+    return "$name / $country";
+  }
+
   factory Timezone.fromJson(Map<String, dynamic> json) => 
     _$TimezoneFromJson(json);
 
@@ -37,6 +41,5 @@ class Timezone {
   
   @override
   int get hashCode => Object.hash(id, name, country, lat, lon);
-  
   
 }

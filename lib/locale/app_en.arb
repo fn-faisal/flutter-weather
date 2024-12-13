@@ -25,5 +25,15 @@
     "lbl_txt_aq": "AQ",
     "@lbl_txt_aq": {
         "description": "AQ label text"
+    },
+    "lbl_search_bar": "Search Location",
+    "@lbl_search_bar": {},
+    "lbl_save_timezone": "Save timezone?",
+    "@lbl_save_timezone": {},
+    "err_no_result": "No Result",
+    "@err_no_result": {},
+    "err_unknown": "An unknown error occurred.",
+    "@err_unknown": {
+        "description": "AQ label text"
     }
 }

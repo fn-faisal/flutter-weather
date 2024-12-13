@@ -52,7 +52,7 @@ class _ForecastListSliderState extends State<ForecastListSlider> {
                 padding: const EdgeInsets.symmetric(
                   horizontal: Sizes.md
                 ),
-                child: const ForecastDetail()
+                // child: const ForecastDetail()
               )
             )
           ).toList(),

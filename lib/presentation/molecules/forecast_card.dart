@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:weather_app/domain/entities/current_temperature.dart';
 import 'package:weather_app/utils/sizes.dart';
 
 class ForecastCard extends StatelessWidget {
-  const ForecastCard({super.key});
+  final CurrentTemperature? forecast;
+  const ForecastCard({
+    super.key,
+    required this.forecast
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +18,7 @@ class ForecastCard extends StatelessWidget {
           'assets/icons/weather/cloudy.svg',
           width: Sizes.lg * 10,
           height: Sizes.lg * 10,
-          colorFilter: ColorFilter.mode(
+          colorFilter: const ColorFilter.mode(
             Colors.blue, 
             BlendMode.srcIn,
           ),
@@ -21,15 +26,15 @@ class ForecastCard extends StatelessWidget {
         Column(
           children: [
             Text(
-              "Timezone",
-              style: TextStyle(
+              forecast?.location.toString() ?? '',
+              style: const TextStyle(
                 fontSize: Sizes.lg,
                 fontWeight: FontWeight.bold
               ),
             ),
             Text(
-              "30'",
-              style: TextStyle(
+              "${forecast?.current.tempCelsius} '",
+              style: const TextStyle(
                 fontSize: Sizes.xl,
                 fontWeight: FontWeight.bold
               ),

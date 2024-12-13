@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/domain/entities/current_temperature.dart';
 import 'package:weather_app/presentation/organism/forecast_detail.dart';
 import 'package:weather_app/utils/sizes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class TimezonePageTemplate extends StatelessWidget {
+class ForecastPageTemplate extends StatelessWidget {
   final String appBarTitleText;
   final void Function()? onSaveTimezone;
-
-  const TimezonePageTemplate({
+  final CurrentTemperature? forecast;
+  final bool loading;
+  const ForecastPageTemplate({
     super.key,
     required this.appBarTitleText,
-    this.onSaveTimezone
+    required this.forecast,
+    this.onSaveTimezone,
+    this.loading = false,
   });
 
   @override
@@ -36,12 +40,12 @@ class TimezonePageTemplate extends StatelessWidget {
           )
         ],
       ),
-      body: const Padding(
-        padding: EdgeInsets.symmetric(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(
           // vertical: Sizes.md,
           horizontal: Sizes.xl
         ),
-        child: ForecastDetail(),
+        child: ForecastDetail( loading: loading, forecast: forecast ),
       ),
     );
   }

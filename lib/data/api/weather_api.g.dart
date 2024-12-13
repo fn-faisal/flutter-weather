@@ -57,7 +57,7 @@ class _WeatherApi implements WeatherApi {
   }
 
   @override
-  Future<CurrentTemperature> current(
+  Future<CurrentTemperature> forecast(
     String q,
     int days,
   ) async {

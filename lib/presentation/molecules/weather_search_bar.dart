@@ -2,13 +2,15 @@ import 'dart:async';
 import 'package:debounce_throttle/debounce_throttle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:weather_app/domain/entities/timezone.dart';
 import 'package:weather_app/utils/sizes.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WeatherSearchBar extends StatefulWidget {
 
   final String placeholder;
-  final Future<List<String>> Function(String) onSearch;
-  final void Function(String)? onSelectTimezone;
+  final Future<List<Timezone>> Function(String) onSearch;
+  final void Function(Timezone)? onSelectTimezone;
 
   const WeatherSearchBar({
     super.key, 
@@ -23,10 +25,10 @@ class WeatherSearchBar extends StatefulWidget {
 
 class _WeatherSearchBarState extends State<WeatherSearchBar> {
   final searchController = SearchController();
-  List<String> suggestions = [];
+  List<Timezone> suggestions = [];
   bool isLoading = false;
 
-  Completer<List<String>> _completer = Completer();
+  Completer<List<Timezone>> _completer = Completer();
 
   late final Debouncer _debouncer = Debouncer(const Duration(seconds: 1),
     initialValue: '',
@@ -35,7 +37,7 @@ class _WeatherSearchBarState extends State<WeatherSearchBar> {
     }
   );
 
-  Future<List<String>> _fetchSuggestions(String query) async {
+  Future<List<Timezone>> _fetchSuggestions(String query) async {
     setState(() {
       isLoading = false;
     });
@@ -106,7 +108,7 @@ class _WeatherSearchBarState extends State<WeatherSearchBar> {
             }
             if ( data == null || data.isEmpty ) {
               return ListTile(
-                title: const Text('No results'),
+                title: Text(AppLocalizations.of(context)!.err_no_result),
                 onTap: () {
                   searchController.closeView('');
                 },
@@ -117,13 +119,14 @@ class _WeatherSearchBarState extends State<WeatherSearchBar> {
               physics: const NeverScrollableScrollPhysics(),
               itemCount: data.length,
               itemBuilder: (BuildContext context, int index) {
+                final timezoneItem = data[index];
                 return ListTile(
                   title: ListTile(
-                    title: Text(data[index]),
+                    title: Text(timezoneItem.toString()),
                     onTap: () {
-                      searchController.closeView(data[index]);
+                      searchController.closeView(timezoneItem.toString());
                       if ( widget.onSelectTimezone != null ) {
-                        widget.onSelectTimezone!(data[index]);
+                        widget.onSelectTimezone!(timezoneItem);
                       }
                     },
                   ),

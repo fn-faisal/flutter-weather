@@ -10,10 +10,10 @@ class CurrentTemperatureFromTimezoneUseCase {
   });
   
   Future<CurrentTemperature> execute({
-    required String timezone,
+    required int timezoneId,
     int? days,
   }) {
-    return temperatureRepository.findByTimezone(timezone, days: days ?? 1);
+    return temperatureRepository.forecastById(timezoneId, days: days ?? 1);
   }
 
   

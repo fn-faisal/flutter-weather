@@ -1,5 +1,6 @@
 
 import 'package:json_annotation/json_annotation.dart';
+import 'package:weather_app/domain/entities/aq.dart';
 import 'package:weather_app/domain/entities/condition.dart';
 
 part 'temprature.g.dart';
@@ -26,7 +27,7 @@ class Temperature {
   // final bool isDay;
 
   // final int humidity;
-  // final int cloud;
+  final int cloud;
 
   @JsonKey( name: 'feelslike_c' )
   final double? feelsLikeCelsius;
@@ -34,10 +35,10 @@ class Temperature {
   @JsonKey( name: 'feelslike_f' )
   final double? feelsLikeFahrenheit;
 
-  // final int uv;
+  final int uv;
 
-  // @JsonKey(name: 'air_quality')
-  // final Aqi aqi;
+  @JsonKey(name: 'air_quality')
+  final Aq? airQuality;
 
   final Condition condition;
 
@@ -47,12 +48,12 @@ class Temperature {
     required this.tempCelsius,
     required this.tempFahrenheit,
     // required this.isDay,
-    // required this.cloud,
+    required this.cloud,
     this.feelsLikeCelsius,
     this.feelsLikeFahrenheit,
     // required this.humidity,
-    // required this.uv,
-    // required this.aqi,
+    required this.uv,
+    this.airQuality,
     required this.condition
   });
 

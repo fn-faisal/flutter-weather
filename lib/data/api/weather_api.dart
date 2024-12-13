@@ -14,6 +14,6 @@ abstract class WeatherApi {
   Future<List<Timezone>> search(@Query('q') String q);
 
   @GET('/forecast.json')
-  Future<CurrentTemperature> current(@Query('q') String q, @Query('days') int days);
+  Future<CurrentTemperature> forecast(@Query('q') String q, @Query('days') int days);
 
 }
