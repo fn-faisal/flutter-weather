@@ -1,3 +1,3 @@
 
 DateTime dateFromEpoch(int epoch) 
-  => DateTime.fromMillisecondsSinceEpoch(epoch);
+  => DateTime.fromMillisecondsSinceEpoch(epoch * 1000);

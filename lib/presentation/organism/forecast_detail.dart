@@ -1,11 +1,16 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:moment_dart/moment_dart.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:weather_app/domain/entities/current_temperature.dart';
+import 'package:weather_app/domain/entities/forecast_day.dart';
 import 'package:weather_app/presentation/molecules/forecast_card.dart';
 import 'package:weather_app/presentation/molecules/forecast_hourly_chart.dart';
 import 'package:weather_app/presentation/molecules/forecast_info_item.dart';
 import 'package:weather_app/utils/sizes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:collection/collection.dart'; // You have to add this manually, for some reason it cannot be added automatically
 
 class ForecastDetail extends StatelessWidget {
   final bool loading;
@@ -17,8 +22,17 @@ class ForecastDetail extends StatelessWidget {
     required this.forecast
   });
 
+  ForecastDay? _getForecastForToday(List<ForecastDay> days) {
+    return days.firstWhereOrNull(
+      (d) => Moment(d.date).isAtSameDayAs(DateTime.now())
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    var forecastToday = _getForecastForToday(
+      forecast?.forecast.forecastDay ?? []
+    );
     return SingleChildScrollView(
       padding: const EdgeInsets.only(
         bottom: 300
@@ -57,11 +71,13 @@ class ForecastDetail extends StatelessWidget {
               const SizedBox(
                 height: Sizes.xl,
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(
+              Padding(
+                padding: const EdgeInsets.symmetric(
                   horizontal: Sizes.lg
                 ),
-                child: ForecastHourlyChart(),
+                child: ForecastHourlyChart(
+                  forecastDay: forecastToday,
+                ),
               )
             ]
           ),

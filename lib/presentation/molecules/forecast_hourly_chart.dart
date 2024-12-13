@@ -1,25 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/utils/sizes.dart';
+import 'package:moment_dart/moment_dart.dart';
+import 'package:weather_app/domain/entities/forecast_day.dart';
 import 'package:fl_chart/fl_chart.dart';
 
 class ForecastHourlyChart extends StatelessWidget {
-  const ForecastHourlyChart({super.key});
+  final ForecastDay? forecastDay;
+
+  const ForecastHourlyChart({
+    super.key,
+    this.forecastDay
+  });
 
   @override
   Widget build(BuildContext context) {
-    // Dummy data: Hourly temperature forecast (time in hours, temp in °C)
-    final List<Map<String, dynamic>> hourlyData = [
-      {"time": "6 AM", "temp": 15},
-      {"time": "7 AM", "temp": 16},
-      {"time": "8 AM", "temp": 18},
-      {"time": "9 AM", "temp": 20},
-      {"time": "10 AM", "temp": 22},
-      {"time": "11 AM", "temp": 23},
-      {"time": "12 PM", "temp": 24},
-      // {"time": "1 PM", "temp": 25},
-      // {"time": "2 PM", "temp": 26},
-      // {"time": "3 PM", "temp": 27},
-    ];
+    final List<Map<String, dynamic>> hourlyData = [];
+    // final List<Map<String, dynamic>> hourlyData = [
+    //   {"time": "6 AM", "temp": 15},
+    //   {"time": "7 AM", "temp": 16},
+    //   {"time": "8 AM", "temp": 18},
+    //   {"time": "9 AM", "temp": 20},
+    //   {"time": "10 AM", "temp": 22},
+    //   {"time": "11 AM", "temp": 23},
+    //   {"time": "12 PM", "temp": 24},
+    //   // {"time": "1 PM", "temp": 25},
+    //   // {"time": "2 PM", "temp": 26},
+    //   // {"time": "3 PM", "temp": 27},
+    // ];
+
+    forecastDay?.hourly.map(
+      (fd) {
+        int differenceInHours = fd.time.difference(DateTime.now()).inHours;
+        if ( differenceInHours >= 0 && differenceInHours <= 5 ) {
+          return hourlyData.add({
+            'time': "${fd.time.hour12} ${fd.time.isAm ? 'AM' : 'PM'}",
+            'temp': fd.tempC
+          });
+        }
+      }
+    ).toList();
+
+    if ( hourlyData.isEmpty ) {
+      return const SizedBox();
+    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
